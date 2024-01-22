@@ -3,7 +3,9 @@ package com.example.frequency.service;
 import com.example.frequency.dto.FrequencyDto;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -27,30 +29,33 @@ public class FrequencyServiceImpl implements FrequencyService {
         Map<Character, Integer> unsortedMap = new HashMap<>();
 
         for (Character ch : arrayForPrepare) {
-             if(isNotBlank(ch)){
+            if (isNotBlank(ch)) {
                 unsortedMap.put(ch, unsortedMap.getOrDefault(ch, 0) + 1);
             }
         }
 
         Map<Character, Integer> sortedMap = unsortedMap.entrySet().stream()
-                .sorted((e,e1)->Integer.compare(e1.getValue(),e.getValue()))
+                .sorted((e, e1) -> Integer.compare(e1.getValue(), e.getValue()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
-                        (a, b) -> { throw new AssertionError(); },
+                        (a, b) -> {
+                            throw new AssertionError();
+                        },
                         LinkedHashMap::new
                 ));
 
         return FrequencyDto.builder().frequency(sortedMap).build();
     }
+
     /**
      * Метод принимает символ и проверяет его содержание пробела.
      *
-     * @param character  принимает символ типа char
+     * @param character принимает символ типа char
      * @return значение типа boolean
      * @since 1.0
      */
-    private boolean isNotBlank(char character){
+    private boolean isNotBlank(char character) {
         return character != ' ';
     }
 }

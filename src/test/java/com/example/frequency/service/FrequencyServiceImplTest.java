@@ -27,20 +27,20 @@ class FrequencyServiceImplTest {
     }
 
     @Test
-    void frequencyIsCorrectWithSpaceInStroke(){
+    void frequencyIsCorrectWithSpaceInStroke() {
         frequencyDto = frequencyService.getFrequencyChars("aaaaa bcccc");
         Assertions.assertEquals("FrequencyDto(frequency={a=5, c=4, b=1})", frequencyDto.toString());
     }
 
     @Test
-    void frequencyIsBlankStroke(){
+    void frequencyIsBlankStroke() {
         frequencyDto = frequencyService.getFrequencyChars("");
-        Assertions.assertEquals("FrequencyDto(frequency={})",frequencyDto.toString());
+        Assertions.assertEquals("FrequencyDto(frequency={})", frequencyDto.toString());
     }
 
     @Test
-    void frequencyIsSpaceStroke(){
+    void frequencyIsSpaceStroke() {
         frequencyDto = frequencyService.getFrequencyChars("    ");
-        Assertions.assertEquals("FrequencyDto(frequency={})",frequencyDto.toString());
+        Assertions.assertEquals("FrequencyDto(frequency={})", frequencyDto.toString());
     }
 }
