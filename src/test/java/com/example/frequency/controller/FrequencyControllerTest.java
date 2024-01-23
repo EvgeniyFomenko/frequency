@@ -1,6 +1,7 @@
 package com.example.frequency.controller;
 
 import com.example.frequency.dto.FrequencyDto;
+import com.example.frequency.exception.ErrorController;
 import com.example.frequency.service.FrequencyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +39,7 @@ class FrequencyControllerTest {
     void setUp() {
         mvc = MockMvcBuilders
                 .standaloneSetup(frequencyController)
+                .setControllerAdvice(new ErrorController())
                 .build();
         Map<Character, Integer> map = new HashMap<>();
         map.put('a', 3);
